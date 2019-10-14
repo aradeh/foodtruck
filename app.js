@@ -29,12 +29,11 @@ http.createServer((req,res) => {
 }).listen(3000);
 
 function addObj(applicant, address){
-   return truckObj.push({
+    return truckObj.push({
         "name" : applicant,
         "address": address
     });
 }
-
 
 console.log("server running on port 3000.");
 //console.log(truckObj);
