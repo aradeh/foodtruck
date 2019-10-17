@@ -1,9 +1,10 @@
 const apiCallRequest = require('./get-api-data');
 const currentDayTime = require('./get-current-daytime');
 const http = require('http');
-var pagination = require('pagination');
+const jsdom = require('jsdom').JSDOM;
 
 let truckObj = [];
+let start = 0;
 
 http.createServer((req,res) => {
     if(req.url === "/getfoodtruck"){
@@ -14,17 +15,33 @@ http.createServer((req,res) => {
                     addObj(response[i].applicant, response[i].location);
                 }
             }
-            var paginator = pagination.create('search', {prelink:'/', current: 1, rowsPerPage: 10, totalResult: 100});
-            console.log("PAGE");
-            console.log(paginator.render());
+            
             //sorting alphabetically with applicant name field
-           // truckObj.sort((a,b) => a.name.localeCompare(b.name));
+            truckObj.sort((a,b) => a.name.localeCompare(b.name));
 
+            //output JSON
             res.write(
                 JSON.stringify(truckObj,null,'\t')
             );
-            console.log("------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            //console.log(JSON.stringify(truckObj,null,'\t'));
+
+            // printing the result on browser
+            // 10 results each time the page is refreshed.
+            // var jsonLength = truckObj.length;
+            // var j=1;
+            // for(var i  = start;i<jsonLength;i++){
+            //     j++;
+            //     res.write(
+            //         JSON.stringify(truckObj[i],null,'\t')
+            //     );
+            //     if(j === 10){break;}
+            //     else if(j === jsonLength){
+            //         res.end();
+            //     }
+            // }
+            // start = i;
+
+
+            //display(truckObj);
             res.end();
         });
     }
@@ -38,4 +55,3 @@ function addObj(applicant, address){
 }
 
 console.log("server running on port 3000.");
-//console.log(truckObj);

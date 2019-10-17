@@ -1,7 +1,11 @@
 let today = new Date();
-console.log(today);
-let timeNow = today.getHours()+":"+today.getMinutes();
+let timeNow = "";
 let day = today.getDay(); //0-6
+if(today.getMinutes()<10){
+    today.getHours()+":0"+today.getMinutes();
+} else {
+    timeNow = today.getHours()+":"+today.getMinutes();
+}
 
 let weekdays = {
     0: "Sunday",
@@ -18,5 +22,5 @@ const dayTime = {
     day : weekdays[day]
 }
 
-console.log(timeNow);
+console.log("Current Time:  " + timeNow);
 module.exports.nowDayTime = dayTime;
