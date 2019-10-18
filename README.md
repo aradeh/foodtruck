@@ -12,4 +12,4 @@
 
 # Check the result:
 - Open a browser and goto to "http://localhost:3000/getfoodtruck"
-- All the result are in JSON format and sorted by applicant alphabetically
+- All the result are in JSON format and sorted alphabetically by applicant.
